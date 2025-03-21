@@ -109,15 +109,15 @@ registryMirrors:
   #     - url: https://registry.my.domain/v2/dockerhub-public
   #       capabilities: ["pull", "resolve"]
   docker.io:
-    - https://quay.io/v2/azimuth/docker.io
+    - https://cicd.nnumbers.com.br/nexus/repository/docker.io/
   ghcr.io:
-    - https://quay.io/v2/azimuth/ghcr.io
+    - https://cicd.nnumbers.com.br/nexus/repository/ghcr.io/
   nvcr.io:
-    - https://quay.io/v2/azimuth/nvcr.io
+    - https://cicd.nnumbers.com.br/nexus/repository/nvcr.io/
   quay.io:
-    - https://quay.io/v2/azimuth/quay.io
+    - https://cicd.nnumbers.com.br/nexus/repository/quay.io/
   registry.k8s.io:
-    - https://quay.io/v2/azimuth/registry.k8s.io
+    - https://cicd.nnumbers.com.br/nexus/repository/registry.k8s.io/
 
 # A map of trusted CAs to add to the system trust on cluster nodes
 trustedCAs: {}
