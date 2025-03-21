@@ -14,7 +14,7 @@ cni:
   # See https://projectcalico.docs.tigera.io/getting-started/kubernetes/helm
   calico:
     chart:
-      repo: https://projectcalico.docs.tigera.io/charts
+      repo: https://cicd.nnumbers.com.br/nexus/repository/charts.projectcalico.docs.tigera.io/
       name: tigera-operator
       version: v3.29.1
     release:
@@ -40,7 +40,7 @@ cni:
   # See https://docs.cilium.io/en/stable/gettingstarted/k8s-install-helm/ for details
   cilium:
     chart:
-      repo: https://helm.cilium.io/
+      repo: https://cicd.nnumbers.com.br/nexus/repository/helm.cilium.io/
       name: cilium
       version: 1.17.0
     release:
@@ -53,7 +53,7 @@ csi:
   cephfs:
     enabled: false
     chart:
-      repo: https://ceph.github.io/csi-charts
+      repo: https://cicd.nnumbers.com.br/nexus/repository/csi-charts.ceph.github.io/
       name: ceph-csi-cephfs
       version: 3.11.0
     release:
@@ -81,7 +81,7 @@ openstack:
     # See https://github.com/kubernetes/cloud-provider-openstack/blob/master/charts/openstack-cloud-controller-manager/values.yaml
     enabled: true
     chart:
-      repo: https://kubernetes.github.io/cloud-provider-openstack
+      repo: https://cicd.nnumbers.com.br/nexus/repository/cloud-provider-openstack.kubernetes.github.io/
       name: openstack-cloud-controller-manager
       version: 2.32.0
     values: {}
@@ -92,7 +92,7 @@ openstack:
     # See https://github.com/kubernetes/cloud-provider-openstack/blob/master/charts/cinder-csi-plugin/values.yaml
     enabled: true
     chart:
-      repo: https://kubernetes.github.io/cloud-provider-openstack
+      repo: https://cicd.nnumbers.com.br/nexus/repository/cloud-provider-openstack.kubernetes.github.io/
       name: openstack-cinder-csi
       version: 2.31.2
     values:
@@ -138,7 +138,7 @@ openstack:
     # See https://github.com/kubernetes/cloud-provider-openstack/blob/master/charts/manila-csi-plugin/values.yaml
     enabled: false
     chart:
-      repo: https://kubernetes.github.io/cloud-provider-openstack
+      repo: https://cicd.nnumbers.com.br/nexus/repository/cloud-provider-openstack.kubernetes.github.io/
       name: openstack-manila-csi
       version: 2.30.0
     values: {}
@@ -174,7 +174,7 @@ openstack:
     enabled: false
     targetNamespace: kube-system
     chart:
-      repo: https://catalyst-cloud.github.io/capi-plugin-helm-charts
+      repo: https://cicd.nnumbers.com.br/nexus/repository/capi-plugin-helm-charts.catalyst-cloud.github.io/
       name: k8s-keystone-auth
       version: 1.4.0
 
@@ -183,7 +183,7 @@ etcdDefrag:
   # Indicates if the etcd defragmentation job should be enabled
   enabled: true
   chart:
-    repo: https://azimuth-cloud.github.io/capi-helm-charts
+    repo: https://cicd.nnumbers.com.br/nexus/repository/nnumbers-capi-helm-charts/
     name: etcd-defrag
     version:  # Defaults to the same version as this chart
   release:
@@ -197,7 +197,7 @@ metricsServer:
   # Indicates if the metrics server should be deployed
   enabled: true
   chart:
-    repo: https://kubernetes-sigs.github.io/metrics-server
+    repo: https://cicd.nnumbers.com.br/nexus/repository/metrics-server.kubernetes-sigs.github.io/
     name: metrics-server
     version: 3.12.2
   release:
@@ -210,7 +210,7 @@ kubernetesDashboard:
   # Indicates if the Kubernetes dashboard should be enabled
   enabled: false
   chart:
-    repo: https://kubernetes.github.io/dashboard
+    repo: https://cicd.nnumbers.com.br/nexus/repository/dashboard.kubernetes.github.io/
     name: kubernetes-dashboard
     version: 6.0.8
   release:
@@ -228,7 +228,7 @@ ingress:
     # The Nginx ingress controller is enabled by default if ingress controllers are enabled
     enabled: true
     chart:
-      repo: https://kubernetes.github.io/ingress-nginx
+      repo: https://cicd.nnumbers.com.br/nexus/repository/ingress-nginx.kubernetes.github.io/
       name: ingress-nginx
       version: 4.12.0
     release:
@@ -243,7 +243,7 @@ monitoring:
   # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack
   kubePrometheusStack:
     chart:
-      repo: https://prometheus-community.github.io/helm-charts
+      repo: https://cicd.nnumbers.com.br/nexus/repository/helm-charts.prometheus-community.github.io/
       name: kube-prometheus-stack
       version: 66.3.1
     release:
@@ -276,7 +276,7 @@ monitoring:
   lokiStack:
     enabled: true
     chart:
-      repo: https://grafana.github.io/helm-charts
+      repo: https://cicd.nnumbers.com.br/nexus/repository/helm-charts.grafana.github.io/
       name: loki-stack
       version: 2.10.2
     release:
@@ -297,7 +297,7 @@ monitoring:
   blackboxExporter:
     enabled: true
     chart:
-      repo: https://prometheus-community.github.io/helm-charts
+      repo: https://cicd.nnumbers.com.br/nexus/repository/helm-charts.prometheus-community.github.io/
       name: prometheus-blackbox-exporter
       version: 9.2.0
     release:
@@ -315,8 +315,8 @@ nodeFeatureDiscovery:
   # Indicates if node feature discovery should be enabled
   enabled: true
   chart:
-    repo: https://kubernetes-sigs.github.io/node-feature-discovery/charts
-    name: node-feature-discovery
+    repo: https://cicd.nnumbers.com.br/nexus/repository/charts.node-feature-discovery.kubernetes-sigs.github.io/
+    name: 
     version: 0.17.1
   release:
     namespace: node-feature-discovery
@@ -330,7 +330,7 @@ nvidiaGPUOperator:
   # that do not need it now but may need it in the future is low
   enabled: true
   chart:
-    repo: https://helm.ngc.nvidia.com/nvidia
+    repo: https://cicd.nnumbers.com.br/nexus/repository/nvidia.helm.ngc.nvidia.com/
     name: gpu-operator
     version: v24.9.2
   release:
@@ -348,7 +348,7 @@ mellanoxNetworkOperator:
   # that do not need it now but may need it in the future is low
   enabled: true
   chart:
-    repo: https://helm.ngc.nvidia.com/nvidia
+    repo: https://cicd.nnumbers.com.br/nexus/repository/nvidia.helm.ngc.nvidia.com/
     name: network-operator
     version: 23.7.0
   release:
@@ -360,7 +360,7 @@ nodeProblemDetector:
   # Indicates if the node problem detector should be enabled
   enabled: true
   chart:
-    repo: https://charts.deliveryhero.io
+    repo: https://cicd.nnumbers.com.br/nexus/repository/charts.deliveryhero.io/
     name: node-problem-detector
     version: 2.3.14
   release:
