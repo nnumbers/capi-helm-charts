@@ -328,7 +328,7 @@ nvidiaGPUOperator:
   # Note that because it uses node feature discovery to run only on nodes
   # with an NVIDIA GPU available, the overhead of enabling this on clusters
   # that do not need it now but may need it in the future is low
-  enabled: true
+  enabled: false
   chart:
     repo: https://cicd.nnumbers.com.br/nexus/repository/nvidia.helm.ngc.nvidia.com/
     name: gpu-operator
@@ -346,7 +346,7 @@ mellanoxNetworkOperator:
   # Note that because it uses node feature discovery to run only on nodes
   # with a Mellanox NIC available, the overhead of enabling this on clusters
   # that do not need it now but may need it in the future is low
-  enabled: true
+  enabled: false
   chart:
     repo: https://cicd.nnumbers.com.br/nexus/repository/nvidia.helm.ngc.nvidia.com/
     name: network-operator
