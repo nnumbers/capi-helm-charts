@@ -316,7 +316,7 @@ nodeFeatureDiscovery:
   enabled: true
   chart:
     repo: https://cicd.nnumbers.com.br/nexus/repository/charts.node-feature-discovery.kubernetes-sigs.github.io/
-    name: 
+    name: node-feature-discovery
     version: 0.17.1
   release:
     namespace: node-feature-discovery
