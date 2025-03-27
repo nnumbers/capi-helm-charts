@@ -25,22 +25,20 @@ spec:
   externalNetwork:
     id: {{ . }}
   {{- end }}
-  {{- with .internalNetwork }}
-  {{- if or .networkFilter .subnetFilter }}
-  {{- with .networkFilter }}
+  {{- if or .internalNetwork.networkFilter .internalNetwork.subnetFilter }}
+  {{- with .internalNetwork.networkFilter }}
   network: {{ include "openstack-cluster.convert.neutronFilter" . | nindent 4 }}
   {{- end }}
-  {{- with .subnetFilter }}
+  {{- with .internalNetwork.subnetFilter }}
   subnets:
     - {{ include "openstack-cluster.convert.neutronFilter" . | nindent 6 }}
   {{- end }}
   {{- else }}
   managedSubnets:
-    - cidr: {{ .nodeCidr }}
+    - cidr: {{ .internalNetwork.nodeCidr }}
       {{- with .dnsNameservers }}
       dnsNameservers: {{ toYaml . | nindent 8 }}
       {{- end }}
-  {{- end }}
   {{- end }}
   {{- end }}
   {{- with .Values.apiServer }}
