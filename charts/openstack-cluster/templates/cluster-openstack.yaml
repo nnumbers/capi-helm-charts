@@ -19,7 +19,13 @@ spec:
   {{- with .Values.clusterNetworking }}
   {{- if .manageSecurityGroups }}
   managedSecurityGroups:
-    allowAllInClusterTraffic: {{ .allowAllInClusterTraffic }}
+    allowAllInClusterTraffic: {{ .manageSecurityGroups.allowAllInClusterTraffic }}
+    {{- if .manageSecurityGroups.allNodesSecurityGroupRules }}
+    allNodesSecurityGroupRules:
+    {{- range .manageSecurityGroups.allNodesSecurityGroupRules }}
+    - {{ . }}
+    {{- end }}
+    {{- end }}
   {{- end }}
   {{- with .externalNetworkId }}
   externalNetwork:

@@ -75,10 +75,29 @@ clusterNetworking:
   # Custom nameservers to use for the hosts
   dnsNameservers:
   # Indicates if security groups should be managed by the cluster
-  manageSecurityGroups: true
-  # Indicates if the managed security groups should allow all in-cluster traffic
-  # The default CNI installed by the addons is Cilium, so this is true by default
-  allowAllInClusterTraffic: true
+  managedSecurityGroups:
+    # Indicates if the managed security groups should allow all in-cluster traffic
+    # The default CNI installed by the addons is Cilium, so this is true by default
+    allowAllInClusterTraffic: true
+    allNodesSecurityGroupRules:
+    - description: Allow BGP between control plane and workers
+      direction: ingress
+      etherType: IPv4
+      name: BGP (Calico)
+      portRangeMax: 179
+      portRangeMin: 179
+      protocol: tcp
+      remoteManagedGroups:
+      - controlplane
+      - worker
+    - description: Allow IP-in-IP between control plane and workers
+      direction: ingress
+      etherType: IPv4
+      name: IP-in-IP (calico)
+      protocol: '4'
+      remoteManagedGroups:
+      - controlplane
+      - worker
   # The ID of the external network to use
   # If not given, the external network will be detected
   externalNetworkId:
