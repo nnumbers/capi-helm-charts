@@ -16,7 +16,7 @@ cni:
     chart:
       repo: https://cicd.nnumbers.com.br/nexus/repository/charts.projectcalico.docs.tigera.io/
       name: tigera-operator
-      version: v3.29.1
+      version: v3.29.3
     release:
       namespace: tigera-operator
       values:
