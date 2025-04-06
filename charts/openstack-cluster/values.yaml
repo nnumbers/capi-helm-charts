@@ -29,7 +29,7 @@ machineSSHKeyName:
 machineMetadata: {}
 
 # The prefix used for project labels and annotations
-projectPrefix: capi.stackhpc.com
+projectPrefix: capi.nnumbers.com.br
 
 # Any extra annotations to add to the cluster
 clusterAnnotations: {}
@@ -391,7 +391,7 @@ nodeGroupDefaults:
   # The ID of the server group to use for machines in the node group
   serverGroupId:
   # Labels to apply to the node objects in Kubernetes that correspond to machines in the node group
-  # By default, nodes get the label "capi.stackhpc.com/node-group=<node group name>"
+  # By default, nodes get the label "capi.nnumbers.com.br/node-group=<node group name>"
   nodeLabels:
     # my.company.org/label: value
   # Additional block devices for node groups machines
