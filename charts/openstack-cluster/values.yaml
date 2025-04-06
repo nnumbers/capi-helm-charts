@@ -109,15 +109,25 @@ registryMirrors:
   #     - url: https://registry.my.domain/v2/dockerhub-public
   #       capabilities: ["pull", "resolve"]
   docker.io:
-    - https://cicd.nnumbers.com.br:5002
+    upstream: https://registry-1.docker.io
+    mirrors:
+    - url: https://cicd.nnumbers.com.br:5002/v2
   ghcr.io:
-    - https://cicd.nnumbers.com.br:5002
+    upstream: https://ghcr.io
+    mirrors:
+    - url: https://cicd.nnumbers.com.br:5002/v2
   nvcr.io:
-    - https://cicd.nnumbers.com.br:5002
+    upstream: https://nvcr.io
+    mirrors:
+    - url: https://cicd.nnumbers.com.br:5002/v2
   quay.io:
-    - https://cicd.nnumbers.com.br:5002
+    upstream: https://quay.io
+    mirrors:
+    - url: https://cicd.nnumbers.com.br:5002/v2
   registry.k8s.io:
-    - https://cicd.nnumbers.com.br:5002
+    upstream: https://registry.k8s.io
+    mirrors:
+    - url: https://cicd.nnumbers.com.br:5002/v2
 
 # A map of trusted CAs to add to the system trust on cluster nodes
 trustedCAs: {}
