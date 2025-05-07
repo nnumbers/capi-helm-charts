@@ -1,0 +1,52 @@
+{{- if and .Values.ingress.enabled .Values.ingress.octavia.enabled }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ include "cluster-addons.componentName" (list . "ingress-octavia") }}-config
+  labels:
+    {{- include "cluster-addons.componentLabels" (list . "ingress-octavia") | nindent 4 }}
+    addons.stackhpc.com/watch: ""
+stringData:
+  defaults: |
+    cluster-name: {{ include "cluster-addons.clusterName" . }}
+    openstack:
+      use-clouds: true
+      clouds-file: /etc/openstack/clouds.yaml
+      cloud: openstack
+      {%- if "cacert" in cloud_identity.data %}
+      ca-file: /etc/openstack/cacert
+      {%- else %}
+      tls-insecure: true
+      {%- endif %}
+    octavia:
+      network-id: {{ openstack_cluster.status.network.id }}
+      subnet-id: {{ openstack_cluster.status.network.subnet.id }}
+      floating-network-id: {{ openstack_cluster.status.apiServerFloatingIP.id }}
+      flavor-id: 
+      provider: amphorav2
+  overrides: |
+    {{- toYaml .Values.ingress.octavia.release.values | nindent 4 }}
+---
+apiVersion: addons.stackhpc.com/v1alpha1
+kind: HelmRelease
+metadata:
+  name: {{ include "cluster-addons.componentName" (list . "ingress-octavia") }}
+  labels: {{ include "cluster-addons.componentLabels" (list . "ingress-octavia") | nindent 4 }}
+  annotations:
+    # Tell Argo to ignore the non-controller owner references for this object
+    argocd.argoproj.io/sync-options: "ControllerReferencesOnly=true"
+spec:
+  clusterName: {{ include "cluster-addons.clusterName" . }}
+  bootstrap: true
+  chart: {{ toYaml .Values.ingress.octavia.chart | nindent 4 }}
+  targetNamespace: {{ .Values.ingress.octavia.release.namespace }}
+  releaseName: ingress-octavia
+  valuesSources:
+    - secret:
+        name: {{ include "cluster-addons.componentName" (list . "ingress-octavia") }}-config
+        key: defaults
+    - secret:
+        name: {{ include "cluster-addons.componentName" (list . "ingress-octavia") }}-config
+        key: overrides
+{{- end }}
