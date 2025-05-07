@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "octavia-ingress-controller.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "octavia-ingress-controller.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "octavia-ingress-controller.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "octavia-ingress-controller.selectorLabels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "octavia-ingress-controller.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - /bin/octavia-ingress-controller
+            - --config=/etc/config/octavia-ingress-controller-config.yaml
+            - --debug={{ .Values.debug }}
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            - mountPath: /etc/kubernetes
+              name: kubernetes-config
+              readOnly: true
+            - mountPath: /var/lib/kubelet/pki
+              name: kubernetes-pki
+              readOnly: true
+            - name: ingress-config
+              mountPath: /etc/config
+            - name: clouds-config
+              mountPath: /etc/openstack
+      volumes:
+        - name: kubernetes-config
+          hostPath:
+            path: /etc/kubernetes
+            type: Directory
+        - name: kubernetes-pki
+          hostPath:
+            path: /var/lib/kubelet/pki
+            type: Directory
+        - name: ingress-config
+          secret:
+            secretName: octavia-ingress-controller-config
+            items:
+              - key: config
+                path: octavia-ingress-controller-config.yaml
+        - name: clouds-config
+          secret:
+            secretName: cloud-config
+            items:
+              - key: clouds.yaml
+                path: clouds.yaml
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
