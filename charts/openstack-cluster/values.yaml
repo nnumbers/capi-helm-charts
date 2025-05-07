@@ -528,3 +528,5 @@ addons:
   # Enable the openstack integrations by default
   openstack:
     enabled: true
+  ingress:
+    enabled: false
