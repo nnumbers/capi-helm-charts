@@ -1,4 +1,5 @@
 charts/*/charts
+*.tgz
 Chart.lock
 .vscode
 manifests.yaml
