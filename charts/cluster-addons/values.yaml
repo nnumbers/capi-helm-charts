@@ -221,18 +221,28 @@ kubernetesDashboard:
 ingress:
   # Indicates if ingress controllers should be enabled
   enabled: false
+  type: nginx
   # Settings for the Nginx ingress controller
   # https://github.com/kubernetes/ingress-nginx/tree/main/charts/ingress-nginx#configuration
   nginx:
     # Indicates if the Nginx ingress controller should be enabled
     # The Nginx ingress controller is enabled by default if ingress controllers are enabled
-    enabled: true
+    enabled: false
     chart:
       repo: https://cicd.nnumbers.com.br/nexus/repository/ingress-nginx.kubernetes.github.io/
       name: ingress-nginx
       version: 4.12.1
     release:
       namespace: ingress-nginx
+      values: {}
+  octavia:
+    enabled: false
+    chart:
+      repo: https://cicd.nnumbers.com.br/nexus/repository/nnumbers-capi-helm-charts/
+      name: octavia-ingress-controller
+      version: 0.5.12
+    release:
+      namespace: ingress-octavia
       values: {}
 
 # Settings for cluster monitoring
