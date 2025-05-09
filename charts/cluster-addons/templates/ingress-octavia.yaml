@@ -10,7 +10,6 @@ metadata:
 stringData:
   defaults: |
     secret:
-      name: ingress-octavia-config
       data:
         config: |
           cluster-name: {{ include "cluster-addons.clusterName" . }}
@@ -25,6 +24,7 @@ stringData:
             {%- else %}
             tls-insecure: true
             {%- endif %}
+            auth-url: {{ "{{" }} cloud_data.auth.auth_url {{ "}}" }}
           octavia:
             subnet-id: {{ "{{" }} infra_cluster.status.network.subnets[0].id {{ "}}" }}
             floating-network-id: {{ "{{" }} infra_cluster.spec.externalNetwork.id {{ "}}" }}
