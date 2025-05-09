@@ -22,8 +22,8 @@ stringData:
       tls-insecure: true
       {%- endif %}
     octavia:
-      subnet-id: {{ "{{" }} infra_cluster.status.network.subnet.id {{ "}}" }}
-      floating-network-id: {{ "{{" }} infra_cluster.status.apiServerFloatingIP.id {{ "}}" }}
+      subnet-id: {{ "{{" }} infra_cluster.status.network.subnets[0].id {{ "}}" }}
+      floating-network-id: {{ "{{" }} infra_cluster.spec.externalNetwork.id {{ "}}" }}
       flavor-id: ""
       provider: amphorav2
   overrides: |
