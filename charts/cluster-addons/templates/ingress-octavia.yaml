@@ -9,23 +9,27 @@ metadata:
     addons.stackhpc.com/watch: ""
 stringData:
   defaults: |
-    cluster-name: {{ include "cluster-addons.clusterName" . }}
-    openstack:
-      use-clouds: true
-      {%- if "clouds.yaml" in cloud_identity.data %}
-      clouds-file: /etc/openstack/clouds.yaml
-      {%- endif %}
-      cloud: openstack
-      {%- if "cacert" in cloud_identity.data %}
-      ca-file: /etc/openstack/cacert
-      {%- else %}
-      tls-insecure: true
-      {%- endif %}
-    octavia:
-      subnet-id: {{ "{{" }} infra_cluster.status.network.subnets[0].id {{ "}}" }}
-      floating-network-id: {{ "{{" }} infra_cluster.spec.externalNetwork.id {{ "}}" }}
-      flavor-id: ""
-      provider: amphorav2
+    secret:
+      name: ingress-octavia-config
+      data:
+        config: |
+          cluster-name: {{ include "cluster-addons.clusterName" . }}
+          openstack:
+            use-clouds: true
+            {%- if "clouds.yaml" in cloud_identity.data %}
+            clouds-file: /etc/openstack/clouds.yaml
+            {%- endif %}
+            cloud: openstack
+            {%- if "cacert" in cloud_identity.data %}
+            ca-file: /etc/openstack/cacert
+            {%- else %}
+            tls-insecure: true
+            {%- endif %}
+          octavia:
+            subnet-id: {{ "{{" }} infra_cluster.status.network.subnets[0].id {{ "}}" }}
+            floating-network-id: {{ "{{" }} infra_cluster.spec.externalNetwork.id {{ "}}" }}
+            flavor-id: ""
+            provider: amphorav2
   overrides: |
     {{- toYaml .Values.ingress.octavia.release.values | nindent 4 }}
 ---
@@ -41,7 +45,7 @@ spec:
   clusterName: {{ include "cluster-addons.clusterName" . }}
   bootstrap: true
   chart: {{ toYaml .Values.ingress.octavia.chart | nindent 4 }}
-  targetNamespace: {{ .Values.ingress.octavia.release.namespace }}
+  targetNamespace: {{ .Values.openstack.targetNamespace }}
   releaseName: ingress-octavia
   valuesSources:
     - secret:
