@@ -240,10 +240,13 @@ ingress:
     chart:
       repo: https://cicd.nnumbers.com.br/nexus/repository/nnumbers-capi-helm-charts/
       name: octavia-ingress-controller
-      version: 0.5.12
+      version: 0.5.23
     release:
-      namespace: ingress-octavia
-      values: {}
+      namespace: openstack-system
+      values:
+        rbac:
+          serviceAccount:
+            create: true
 
 # Settings for cluster monitoring
 monitoring:

@@ -21,11 +21,10 @@ nameOverride: ""
 # fullnameOverride -- full name of the chart.
 fullnameOverride: ""
 
-amphora:
-  provider: amphorav2
-  floating-network-id: ""
-  subnet-id: ""
-  network-id: ""
+secret:
+  name: ingress-octavia-config
+  data:
+    config: ""
 
 rbac:
   serviceAccount:

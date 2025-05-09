@@ -56,8 +56,10 @@ spec:
               readOnly: true
             - name: ingress-config
               mountPath: /etc/config
+              readOnly: true
             - name: clouds-config
               mountPath: /etc/openstack
+              readOnly: true
       volumes:
         - name: kubernetes-config
           hostPath:
