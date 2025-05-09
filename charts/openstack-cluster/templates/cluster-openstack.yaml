@@ -24,20 +24,22 @@ spec:
   externalNetwork:
     id: {{ . }}
   {{- end }}
-  {{- if or .internalNetwork.networkFilter .internalNetwork.subnetFilter }}
-  {{- with .internalNetwork.networkFilter }}
+  {{- with .internalNetwork }}
+  {{- if or .networkFilter .subnetFilter }}
+  {{- with .networkFilter }}
   network: {{ include "openstack-cluster.convert.neutronFilter" . | nindent 4 }}
   {{- end }}
-  {{- with .internalNetwork.subnetFilter }}
+  {{- with .subnetFilter }}
   subnets:
     - {{ include "openstack-cluster.convert.neutronFilter" . | nindent 6 }}
   {{- end }}
   {{- else }}
   managedSubnets:
-    - cidr: {{ .internalNetwork.nodeCidr }}
-      {{- with .dnsNameservers }}
+    - cidr: {{ .nodeCidr }}
+      {{- with (default $.Values.clusterNetworking.dnsNameservers .dnsNameservers) }}
       dnsNameservers: {{ toYaml . | nindent 8 }}
       {{- end }}
+  {{- end }}
   {{- end }}
   {{- end }}
   {{- with .Values.apiServer }}
@@ -48,7 +50,7 @@ spec:
     provider: {{ .loadBalancerProvider }}
     {{- end }}
     {{- if .allowedCidrs }}
-    allowedCIDRs:
+    allowedCidrs:
       {{- range .allowedCidrs }}
       - {{ . }}
       {{- end}}
