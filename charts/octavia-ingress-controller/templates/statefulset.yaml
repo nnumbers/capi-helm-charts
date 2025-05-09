@@ -71,7 +71,7 @@ spec:
             type: Directory
         - name: ingress-config
           secret:
-            secretName: ingress-octavia-config
+            secretName: {{ .Release.Name }}-config
             items:
               - key: config
                 path: octavia-ingress-controller-config.yaml
