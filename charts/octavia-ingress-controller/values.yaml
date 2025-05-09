@@ -22,7 +22,6 @@ nameOverride: ""
 fullnameOverride: ""
 
 secret:
-  name: ingress-octavia-config
   data:
     config: ""
 
