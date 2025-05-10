@@ -12,19 +12,21 @@ stringData:
     secret:
       data:
         config: |
+          {%- if "clouds.yaml" in cloud_identity.data %}
+          {%- set identity_data = cloud_identity.data["clouds.yaml"] | b64decode | fromyaml -%}
+          {%- set cloud_data = identity_data.clouds.openstack -%}
+          {%- endif %}
           cluster-name: {{ include "cluster-addons.clusterName" . }}
           openstack:
             use-clouds: true
-            {%- if "clouds.yaml" in cloud_identity.data %}
-            clouds-file: /etc/openstack/clouds.yaml
-            {%- endif %}
             cloud: openstack
+            clouds-file: /etc/openstack/clouds.yaml
+            auth-url: {{ "{{" }} cloud_data.auth.auth_url {{ "}}" }}
             {%- if "cacert" in cloud_identity.data %}
             ca-file: /etc/openstack/cacert
             {%- else %}
             tls-insecure: true
             {%- endif %}
-            auth-url: {{ "{{" }} cloud_data.auth.auth_url {{ "}}" }}
           octavia:
             subnet-id: {{ "{{" }} infra_cluster.status.network.subnets[0].id {{ "}}" }}
             floating-network-id: {{ "{{" }} infra_cluster.spec.externalNetwork.id {{ "}}" }}
