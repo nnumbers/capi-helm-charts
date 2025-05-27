@@ -418,7 +418,7 @@ mellanoxNetworkOperator:
   chart:
     repo: https://cicd.nnumbers.com.br/nexus/repository/nvidia.helm.ngc.nvidia.com/
     name: network-operator
-    version: 23.7.0
+    version: 25.1.0
   release:
     namespace: network-operator
     values: {}
