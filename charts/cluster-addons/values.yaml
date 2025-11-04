@@ -361,7 +361,7 @@ nvidiaGPUOperator:
   chart:
     repo: https://cicd.nnumbers.com.br/nexus/repository/nvidia.helm.ngc.nvidia.com/
     name: gpu-operator
-    version: v25.3.4
+    version: v25.10.0
   release:
     namespace: gpu-operator
     values:
