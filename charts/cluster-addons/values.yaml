@@ -221,7 +221,7 @@ metricsServer:
     values: {}
 
 # Settings for the Kubernetes dashboard
-# https://github.com/kubernetes/dashboard/tree/master/charts/helm-chart/kubernetes-dashboard
+# https://github.com/kubernetes-retired/dashboard/tree/master/charts/kubernetes-dashboard
 kubernetesDashboard:
   # Indicates if the Kubernetes dashboard should be enabled
   enabled: false
