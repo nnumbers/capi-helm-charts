@@ -215,7 +215,7 @@ metricsServer:
   chart:
     repo: https://cicd.nnumbers.com.br/nexus/repository/metrics-server.kubernetes-sigs.github.io/
     name: metrics-server
-    version: 3.12.2
+    version: 3.13.0
   release:
     namespace: kube-system
     values: {}
