@@ -250,6 +250,19 @@ ingress:
         rbac:
           serviceAccount:
             create: true
+  # Settings for the Traefik ingress controller
+  # https://github.com/traefik/traefik-helm-chart/blob/master/EXAMPLES.md
+  traefik:
+    # Indicates if the Traefik ingress controller should be enabled
+    # The Traefik ingress controller is enabled by default if ingress controllers are enabled
+    enabled: false
+    chart:
+      repo: https://traefik.github.io/charts
+      name: traefik
+      version: v39.0.5
+    release:
+      namespace: traefik
+      values: {}
 
 # Settings for cluster monitoring
 monitoring:

@@ -3,3 +3,5 @@ charts/*/charts
 Chart.lock
 .vscode
 manifests.yaml
+clouds.yaml
+clusterctl
