@@ -274,7 +274,7 @@ monitoring:
     chart:
       repo: https://cicd.nnumbers.com.br/nexus/repository/helm-charts.prometheus-community.github.io/
       name: kube-prometheus-stack
-      version: 82.11.0
+      version: 82.15.1
     release:
       namespace: monitoring-system
       values:
