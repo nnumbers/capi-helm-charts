@@ -328,7 +328,7 @@ monitoring:
     chart:
       repo: https://cicd.nnumbers.com.br/nexus/repository/helm-charts.prometheus-community.github.io/
       name: prometheus-blackbox-exporter
-      version: 11.9.0
+      version: 11.9.1
     release:
       namespace: monitoring-system
       values: {}
