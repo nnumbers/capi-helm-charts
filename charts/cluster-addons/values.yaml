@@ -259,7 +259,7 @@ ingress:
       #repo: https://traefik.github.io/charts
       repo: https://cicd.nnumbers.com.br/nexus/repository/charts.traefik.github.io
       name: traefik
-      version: 40.0.0
+      version: 40.1.0
     release:
       namespace: traefik
       values: {}
