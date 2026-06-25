@@ -242,7 +242,7 @@ ingress:
     chart:
       repo: https://cicd.nnumbers.com.br/nexus/repository/nnumbers-capi-helm-charts/
       name: octavia-ingress-controller
-      version: 0.5.30
+      version:  # Defaults to the same version as this chart
     release:
       namespace: openstack-system
       values:
