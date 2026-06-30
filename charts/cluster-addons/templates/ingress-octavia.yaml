@@ -46,7 +46,10 @@ metadata:
 spec:
   clusterName: {{ include "cluster-addons.clusterName" . }}
   bootstrap: true
-  chart: {{ toYaml .Values.ingress.octavia.chart | nindent 4 }}
+  chart:
+    repo: {{ .Values.ingress.octavia.chart.repo }}
+    name: {{ .Values.ingress.octavia.chart.name }}
+    version: {{ default .Chart.Version .Values.ingress.octavia.chart.version }}
   targetNamespace: {{ .Values.openstack.targetNamespace }}
   releaseName: ingress-octavia
   valuesSources:
