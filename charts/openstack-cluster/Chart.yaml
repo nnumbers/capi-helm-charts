@@ -2,12 +2,12 @@ apiVersion: v2
 name: openstack-cluster
 description: Helm chart for deploying a cluster on an OpenStack cloud using Cluster API.
 type: application
-version: 1.0.0
+version: 1.11.1
 appVersion: main
 
 dependencies:
   - name: cluster-addons
-    version: 1.0.0
+    version: 1.11.1
     repository: file://../cluster-addons
     alias: addons
     condition: addons.enabled
