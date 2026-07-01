@@ -94,7 +94,7 @@ openstack:
     chart:
       repo: https://cicd.nnumbers.com.br/nexus/repository/cloud-provider-openstack.kubernetes.github.io/
       name: openstack-cinder-csi
-      version: 2.35.0
+      version: 2.36.0
     values:
       csi:
         plugin:
@@ -140,7 +140,7 @@ openstack:
     chart:
       repo: https://cicd.nnumbers.com.br/nexus/repository/cloud-provider-openstack.kubernetes.github.io/
       name: openstack-manila-csi
-      version: 2.30.0
+      version: 2.36.0
     values: {}
     # Definition of the default storage class for the Manila CSI
     defaultStorageClass:
