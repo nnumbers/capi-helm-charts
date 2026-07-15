@@ -254,7 +254,7 @@ ingress:
   traefik:
     # Indicates if the Traefik ingress controller should be enabled
     # The Traefik ingress controller is enabled by default if ingress controllers are enabled
-    enabled: true
+    enabled: false
     chart:
       #repo: https://traefik.github.io/charts
       repo: https://cicd.nnumbers.com.br/nexus/repository/charts.traefik.github.io
